@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Supprimer des DMI{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col col-sm-5 offset-sm-3">
+            <br><br>
+            <h4 class="text-center">Supprimer des DMI</h4>
+            <hr>
+            <form action="{% url 'core:suppression_dmi' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <label for="type_brevet">Choisir un type :</label>
+                          <select class="form-control form-control-sm" name="type_dmi" id="type_brevet">
+                              {% for l in liste_type_pi %}
+                              <option value="{{l.type_dmi}}">{{l.type_dmi}}</option>
+                              {% endfor %}
+                          </select>
+                    </div>
+                    <div class="col">
+                        <label for="annee_brevet">Choisir une année :</label>
+                          <select class="form-control form-control-sm" name="annee_dmi" id="annee_brevet">
+                            {% for l in liste_annee_pi %}
+                              <option value="{{l.annee_dmi}}">{{l.annee_dmi}}</option>
+                              {% endfor %}
+                          </select>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-outline-primary float-right">Valider</button>
+            </form>
+            <br><br>
+            <hr>
+        </div>
+    </div>
+{% endblock %}

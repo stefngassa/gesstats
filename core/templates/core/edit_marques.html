@@ -1,0 +1,240 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Modifier la Marque{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <br>
+            <h4 class="text-center">Modification de la Marque</h4>
+            <hr>
+            <form method="post" action="{% url 'core:edit_marques' marque.pk %}">
+                {% csrf_token %}
+                  <div class="form-row">
+                      <div class="col">
+                          <label for="pays_marques">Pays :</label>
+                          <select class="form-control" name="pays_marques" id="pays_marques">
+                              {% for p in pays %}
+                                    <option value="{{ p.pk }}" {% if marque.pk == p.pk %}selected{% endif %}>{{ p.nom_pays }}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                      <div class="col">
+                          <label for="type_marques">Type de la Marque :</label>
+                          <select class="form-control" name="type_marques" id="type_marques">
+                              <option value="Enreg Madrid" {% if marque.type_marques == 'Enreg Madrid' %}selected{% endif %}>Enreg Madrid</option>
+                              <option value="Enreg Regionale - Nationale" {% if marque.type_marques == 'Enreg Regionale - Nationale' %}selected{% endif %}>Enreg Regionale - Nationale</option>
+                              <option value="Enreg Regionale - Etranger" {% if marque.type_marques == 'Enreg Regionale - Etranger' %}selected{% endif %}>Enreg Regionale - Etranger</option>
+                              <option value="Demande - Madrid" {% if marque.type_marques == 'Demande - Madrid' %}selected{% endif %}>Demande - Madrid</option>
+                              <option value="Demande Regionale - Nationale" {% if marque.type_marques == 'Demande Regionale - Nationale' %}selected{% endif %}>Demande Regionale - Nationale</option>
+                              <option value="Demande Regionale - Etranger" {% if marque.type_marques == 'Demande Regionale - Etranger' %}selected{% endif %}>Demande Regionale - Etranger</option>
+                          </select>
+                      </div>
+                      <div class="col">
+                          <label for="nombre_marques">Nombre de Marque :</label>
+                          <input type="number" name="nombre_marques" class="form-control" id="nombre_marques" aria-describedby="emailHelp" value="{{ marque.nombre_marques }}">
+                      </div>
+                      <div class="col">
+                        <label for="annee_marques">Année de la Marque :</label>
+                        <input type="number" name="annee_marques" class="form-control" id="annee_marques" aria-describedby="emailHelp" value="{{ marque.annee_marques }}">
+                      </div>
+                  </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_1">Classe 1 :</label>
+                        <input type="number" id="classe_1" name="classe_1" class="form-control" value="{{ marque.classe_1 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_2">Classe 2 :</label>
+                        <input type="number" id="classe_2" name="classe_2" class="form-control" value="{{ marque.classe_2 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_3">Classe 3:</label>
+                        <input type="number" id="classe_3" name="classe_3" class="form-control" value="{{ marque.classe_3 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_4">Classe 4 :</label>
+                        <input type="number" id="classe_4" name="classe_4" class="form-control" value="{{ marque.classe_4 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_5">Classe 5 :</label>
+                        <input type="number" id="classe_5" name="classe_5" class="form-control" value="{{ marque.classe_5 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_6">Classe 6 :</label>
+                        <input type="number" id="classe_6" name="classe_6" class="form-control" value="{{ marque.classe_6 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_7">Classe 7 :</label>
+                        <input type="number" id="classe_7" name="classe_7" class="form-control" value="{{ marque.classe_7 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_8">Classe 8 :</label>
+                        <input type="number" id="classe_8" name="classe_8" class="form-control" value="{{ marque.classe_8 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_9">Classe 9 :</label>
+                        <input type="number" id="classe_9" name="classe_9" class="form-control" value="{{ marque.classe_9 }}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_10">Classe 10 :</label>
+                        <input type="number" id="classe_10" name="classe_10" class="form-control" value="{{ marque.classe_10 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_11">Classe 11:</label>
+                        <input type="number" id="classe_11" name="classe_11" class="form-control" value="{{ marque.classe_11 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_12">Classe 12 :</label>
+                        <input type="number" id="classe_12" name="classe_12" class="form-control" value="{{ marque.classe_12 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_13">Classe 13 :</label>
+                        <input type="number" id="classe_13" name="classe_13" class="form-control" value="{{ marque.classe_13 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_14">Classe 14 :</label>
+                        <input type="number" id="classe_14" name="classe_14" class="form-control" value="{{ marque.classe_14 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_15">Classe 15 :</label>
+                        <input type="number" id="classe_15" name="classe_15" class="form-control" value="{{ marque.classe_15 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_16">Classe 16 :</label>
+                        <input type="number" id="classe_16" name="classe_16" class="form-control" value="{{ marque.classe_16 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_17">Classe 17 :</label>
+                        <input type="number" id="classe_17" name="classe_17" class="form-control" value="{{ marque.classe_17 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_2">Classe 18 :</label>
+                        <input type="number" id="classe_18" name="classe_18" class="form-control" value="{{ marque.classe_18 }}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_3">Classe 19 :</label>
+                        <input type="number" id="classe_19" name="classe_19" class="form-control" value="{{ marque.classe_19 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_4">Classe 20 :</label>
+                        <input type="number" id="classe_20" name="classe_20" class="form-control" value="{{ marque.classe_20 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_5">Classe 21 :</label>
+                        <input type="number" id="classe_21" name="classe_21" class="form-control" value="{{ marque.classe_21 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_6">Classe 22 :</label>
+                        <input type="number" id="classe_22" name="classe_22" class="form-control" value="{{ marque.classe_22 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_7">Classe 23 :</label>
+                        <input type="number" id="classe_23" name="classe_23" class="form-control" value="{{ marque.classe_23 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_8">Classe 24 :</label>
+                        <input type="number" id="classe_24" name="classe_24" class="form-control" value="{{ marque.classe_24 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_1">Classe 25 :</label>
+                        <input type="number" id="classe_25" name="classe_25" class="form-control" value="{{ marque.classe_25 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_2">Classe 26 :</label>
+                        <input type="number" id="classe_26" name="classe_26" class="form-control" value="{{ marque.classe_26 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_3">Classe 27 :</label>
+                        <input type="number" id="classe_27" name="classe_27" class="form-control" value="{{ marque.classe_27 }}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_4">Classe 28 :</label>
+                        <input type="number" id="classe_28" name="classe_28" class="form-control" value="{{ marque.classe_28 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_5">Classe 29 :</label>
+                        <input type="number" id="classe_29" name="classe_29" class="form-control" value="{{ marque.classe_29 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_6">Classe 30 :</label>
+                        <input type="number" id="classe_30" name="classe_30" class="form-control" value="{{ marque.classe_30 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_7">Classe 31 :</label>
+                        <input type="number" id="classe_31" name="classe_31" class="form-control" value="{{ marque.classe_31 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_8">Classe 32 :</label>
+                        <input type="number" id="classe_32" name="classe_32" class="form-control" value="{{ marque.classe_32 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_33">Classe 33:</label>
+                        <input type="number" id="classe_33" name="classe_33" class="form-control" value="{{ marque.classe_33 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_34">Classe 34 :</label>
+                        <input type="number" id="classe_34" name="classe_34" class="form-control" value="{{ marque.classe_34 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_35">Classe 35 :</label>
+                        <input type="number" id="classe_35" name="classe_35" class="form-control" value="{{ marque.classe_35 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_36">Classe 36 :</label>
+                        <input type="number" id="classe_36" name="classe_36" class="form-control" value="{{ marque.classe_36 }}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_37">Classe 37 :</label>
+                        <input type="number" id="classe_37" name="classe_37" class="form-control" value="{{ marque.classe_37 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_8">Classe 38 :</label>
+                        <input type="number" id="classe_38" name="classe_38" class="form-control" value="{{ marque.classe_38 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_39">Classe 39 :</label>
+                        <input type="number" id="classe_39" name="classe_39" class="form-control" value="{{ marque.classe_39 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_40">Classe 40 :</label>
+                        <input type="number" id="classe_40" name="classe_40" class="form-control" value="{{ marque.classe_40 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_41">Classe 41:</label>
+                        <input type="number" id="classe_41" name="classe_41" class="form-control" value="{{ marque.classe_41 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_42">Classe 42 :</label>
+                        <input type="number" id="classe_42" name="classe_42" class="form-control" value="{{ marque.classe_42 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_43">Classe 43 :</label>
+                        <input type="number" id="classe_43" name="classe_43" class="form-control" value="{{ marque.classe_43 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_44">Classe 44 :</label>
+                        <input type="number" id="classe_44" name="classe_44" class="form-control" value="{{ marque.classe_44 }}">
+                    </div>
+                    <div class="col">
+                        <label for="classe_45">Classe 45 :</label>
+                        <input type="number" id="classe_45" name="classe_45" class="form-control" value="{{ marque.classe_45 }}">
+                    </div>
+                </div>
+                <br>
+                  <button type="submit" class="btn btn-outline-primary float-right">Valider</button>
+            </form>
+            <br><br>
+            <hr>
+        </div>
+    </div>
+{% endblock %}

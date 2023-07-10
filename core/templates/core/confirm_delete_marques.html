@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Suppression d'un DMI{% endblock %}
+
+
+{% block content %}
+    <div class="card text-center">
+      <div class="card-header">
+        Informations
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Suppression d'une Marque</h5>
+        <p class="card-text">Voulez-vous vraiment cette Marque ?</p>
+        <a href="{% url 'core:listing_marques' %}" class="btn btn-outline-secondary">Annuler</a>
+        <a href="{% url 'core:delete_marques' pk %}" class="btn btn-outline-danger">Valider</a>
+      </div>
+    </div>
+{% endblock %}

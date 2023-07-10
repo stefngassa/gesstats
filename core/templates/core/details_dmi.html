@@ -1,0 +1,137 @@
+{% extends 'main/base.html' %}
+{% load authenticate_filter %}
+
+{% block title %}Détails du DMI{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col col-sm-12">
+            {% if dmis|length == 0 %}
+                <div class="container">
+                    <div class="card text-center">
+                          <div class="card-header h1">
+                                    Informations
+                          </div>
+                          <div class="card-body">
+                            <h5 class="card-title">Aucun DMI ajouté pour le pays {{ nom }} dans la base de données</h5>
+                            <p class="card-text">Bien vouloir informer l'administrateur système ou le statisticien.</p>
+                            {% if request.user|has_group:'admin' %}
+                              <a href="{% url 'core:listing_dmi' %}" class="btn btn-primary">Voir listing des DMI</a>
+                            {% endif %}
+                          </div>
+                    </div>
+                </div>
+            {% else %}
+                <h5>Informations détaillées du DMI</h5>
+                <div class="alert alert-dark" role="alert">
+                  Pays : <strong>{{ nom }}</strong>
+                    | Total : <strong>{{ nbre_dmi.nombre_dmi__sum }}</strong>
+                    | Demande : <strong>{% if nbre_demande.nombre_dmi__sum > 0 %}{{ nbre_demande.nombre_dmi__sum }}{% else %}0{% endif %}</strong>
+                    | Enregistrement : <strong>{% if nbre_enreg.nombre_dmi__sum > 0 %}{{ nbre_enreg.nombre_dmi__sum }}{% else %}0{% endif %}</strong>
+                    | Somme des classes : <strong>{{ total_somme_classes }}</strong>
+                    | Nombre de classes : <strong>{{ total_nombre_classes }}</strong>
+                </div>
+                <table id="my_table" class="table table-bordered table-responsive">
+                      <thead>
+                        <tr>
+                            {% if request.user|has_group:'admin' %}
+                          <th scope="col">Actions</th>
+                            {% endif %}
+                          <th scope="col">Type</th>
+                          <th scope="col">Année</th>
+                            <th scope="col">Nombre</th>
+                          <th scope="col">1</th>
+                          <th scope="col">2</th>
+                          <th scope="col">3</th>
+                          <th scope="col">4</th>
+                          <th scope="col">5</th>
+                          <th scope="col">6</th>
+                          <th scope="col">7</th>
+                          <th scope="col">8</th>
+                          <th scope="col">9</th>
+                          <th scope="col">10</th>
+                          <th scope="col">11</th>
+                          <th scope="col">12</th>
+                          <th scope="col">13</th>
+                          <th scope="col">14</th>
+                          <th scope="col">15</th>
+                          <th scope="col">16</th>
+                          <th scope="col">17</th>
+                          <th scope="col">18</th>
+                          <th scope="col">19</th>
+                          <th scope="col">20</th>
+                          <th scope="col">21</th>
+                          <th scope="col">22</th>
+                          <th scope="col">23</th>
+                          <th scope="col">24</th>
+                          <th scope="col">25</th>
+                          <th scope="col">26</th>
+                          <th scope="col">27</th>
+                          <th scope="col">28</th>
+                          <th scope="col">29</th>
+                          <th scope="col">30</th>
+                          <th scope="col">31</th>
+                          <th scope="col">32</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            {% for b in dmi_list %}
+                                <tr>
+                                    {% if request.user|has_group:'admin' %}
+                                    <td>
+                                          <a href="{% url 'core:edit_dmi' b.pk %}" class="btn btn-outline-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                          <a href="{% url 'core:confirm_delete_dmi' b.pk %}" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                    {% endif %}
+                                    <td>{{ b.type_dmi }}</td>
+                                    <td>{{ b.annee_dmi }}</td>
+                                    <td class="text-center">{{ b.nombre_dmi }}</td>
+                                    <td>{{ b.classe_1 }}</td>
+                                    <td>{{ b.classe_2 }}</td>
+                                    <td>{{ b.classe_3 }}</td>
+                                    <td>{{ b.classe_4 }}</td>
+                                    <td>{{ b.classe_5 }}</td>
+                                    <td>{{ b.classe_6 }}</td>
+                                    <td>{{ b.classe_7 }}</td>
+                                    <td>{{ b.classe_8 }}</td>
+                                    <td>{{ b.classe_9 }}</td>
+                                    <td>{{ b.classe_10 }}</td>
+                                    <td>{{ b.classe_11 }}</td>
+                                    <td>{{ b.classe_12 }}</td>
+                                    <td>{{ b.classe_13 }}</td>
+                                    <td>{{ b.classe_14 }}</td>
+                                    <td>{{ b.classe_15 }}</td>
+                                    <td>{{ b.classe_16 }}</td>
+                                    <td>{{ b.classe_17 }}</td>
+                                    <td>{{ b.classe_18 }}</td>
+                                    <td>{{ b.classe_19 }}</td>
+                                    <td>{{ b.classe_20 }}</td>
+                                    <td>{{ b.classe_21 }}</td>
+                                    <td>{{ b.classe_22 }}</td>
+                                    <td>{{ b.classe_23 }}</td>
+                                    <td>{{ b.classe_24 }}</td>
+                                    <td>{{ b.classe_25 }}</td>
+                                    <td>{{ b.classe_26 }}</td>
+                                    <td>{{ b.classe_27 }}</td>
+                                    <td>{{ b.classe_28 }}</td>
+                                    <td>{{ b.classe_29 }}</td>
+                                    <td>{{ b.classe_30 }}</td>
+                                    <td>{{ b.classe_31 }}</td>
+                                    <td>{{ b.classe_32 }}</td>
+                                </tr>
+                            {% endfor %}
+                      </tbody>
+                </table>
+            <br>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#my_table').DataTable();
+    });
+</script>
+{% endblock %}

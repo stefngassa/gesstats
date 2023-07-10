@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %}
+{% load authenticate_filter %}
+
+{% block title %}Listing des utilisateurs{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col col-sm-2">
+            <div class="list-group">
+                <div class="btn-group dropright">
+                  <button class="list-group-item list-group-item-action active dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Gestion des utilisateurs
+                  </button>
+                  <div class="dropdown-menu">
+                      <a href="{% url 'core:listing_users' %}" class="dropdown-item {% if i_menu == 'users' %}active{% endif %}">Liste des Utilisateurs</a>
+                      <a href="{% url 'core:register' %}" class="dropdown-item{% if i_menu == 'register' %}active{% endif %}">Ajouter un utilisateur</a>
+                  </div>
+                </div>
+                <div class="btn-group dropright">
+                  <button class="list-group-item list-group-item-action dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Exporter des fichiers
+                  </button>
+                  <div class="dropdown-menu">
+                      <a href="{% url 'core:export_file_oapi' %}" class="dropdown-item {% if i_menu == 'oapi' %}active{% endif %}">Fichiers OAPI</a>
+                      <a href="{% url 'core:export_file_ompi' %}" class="dropdown-item {% if i_menu == 'ompi' %}active{% endif %}">Fichiers OMPI</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-10">
+            <h4>Listing des utilisateurs</h4>
+            <div class="alert alert-dark" role="alert">
+              Nombre d'utilisateurs : <strong>{{ users|length }}</strong>
+            </div>
+            <table id="my_table" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom d'utilisateur</th>
+                        <th scope="col" class="text-center">Email</th>
+                        <th scope="col">Rôle</th>
+                        <th scope="col">Dernière connexion</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                        <tr>
+                            <td class="text-center">{{ u.username }}</td>
+                            <td class="text-center">{{ u.email }}</td>
+                            <td class="text-center">
+                                {{u.groups.all.0|title}}
+                            </td>
+                            <td class="text-center">{{ u.last_login }}</td>
+                            <td>
+                                <a href="#" class="btn btn-outline-info btn-sm">Modifier</a>
+                                {% if u.is_active %}
+                                    <a href="{% url 'core:edit_status' 'deactivate' u.username %}" class="btn btn-outline-danger btn-sm">Désactiver</a>
+                                {% else %}
+                                    <a href="{% url 'core:edit_status' 'activate' u.username %}" class="btn btn-outline-success btn-sm">Activer</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#my_table').DataTable();
+    });
+</script>
+{% endblock %}

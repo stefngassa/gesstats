@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+<br><br><br>
+<div class="row">
+  <div class="col col-sm-4">
+    <img class="card-img" src="{% static 'assets/img/image_.jpg' %}" alt="Card image" width="100%">
+  </div>
+  <div class="col col-sm-8">
+    <h4>Bienvenue sur l'application GESSTATS</h4>
+    <hr>
+    <div>
+        Cette aplication a été conçue dans le but de faciliter l'accès à des données spécifiques de propriété industrielle pour une année donnée et un pays bien précis.
+        Elle permet également de visualiser l'évolution d'un type de propriété industrielle sur les 5 dernières années, ainsi que le top 5 tant des pays membres ou pays de
+        l'OAPI. Elle puise toute son utilité dans la recherche facile et l'accessibilité des informations concernant le dépôt de demandes, d'enregistrement ou de délivrance
+        de brevets, marques ou dessins et modèle industriel pour les différents pays de l'OAPI sur diverses années.
+    </div>
+  </div>
+</div>
+{% endblock %}

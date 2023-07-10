@@ -1,0 +1,102 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Exporter un fichier{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col col-sm-3">
+            <div class="list-group">
+                <li class="list-group-item">
+                      <a href="{% url 'core:register' %}" class="btn">Gestion des utilisateurs</a>
+                </li>
+                <div class="btn-group dropright">
+                  <button class="list-group-item list-group-item-action active dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Exporter des fichiers
+                  </button>
+                  <div class="dropdown-menu">
+                      <a href="{% url 'core:export_file_oapi' %}" class="dropdown-item {% if i_menu == 'oapi' %}active{% endif %}">Fichiers OAPI</a>
+                      <a href="{% url 'core:export_file_ompi' %}" class="dropdown-item {% if i_menu == 'ompi' %}active{% endif %}">Fichiers OMPI</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-9">
+            <h4>Exporter des fichiers pour l'OMPI</h4>
+            <hr>
+            <form action="{% url 'core:export_file_ompi' %}" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <label for="pi">Choisir un type :</label>
+                        <select name="pi" id="pi"class="form-control">
+                            <option value="Brevets">Brevets</option>
+                            <option value="DMI Origin">DMI Origin</option>
+                            <option value="DMI Classes">DMI Classes</option>
+                            <option value="Marque Origin">Marque Origin</option>
+                            <option value="Marque Classes">Marque Classes</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="type_pi">Choisir un type :</label>
+                        <select name="type_pi" id="type_pi" class="form-control">
+                            <option value="Delivrance">Delivrance</option>
+                            <option value="Demande">Demande</option>
+                            <option value="Enregistrement">Enregistrement</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="annee">Entrez une année :</label>
+                        <input type="text" name="annee" id="annee" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="exampleFormControlFile1">Choisir un fichier :</label>
+                        <input required type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-outline-primary float-right">Valider</button>
+            </form>
+            <br><br>
+            <hr>
+        </div>
+        <div class="col offset-sm-3">
+            <h4>Historique des fichiers téléchargés</h4>
+            <div class="alert alert-dark" role="alert">
+              Nombre de fichiers téléchargés : <strong>{{ history|length }}</strong>
+            </div>
+            <table id="my_table" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Type de fichier</th>
+                        <th scope="col" class="text-center">Nature du fichier</th>
+                        <th scope="col" class="text-center">Type de PI</th>
+                        <th scope="col" class="text-center">Année</th>
+                        <th scope="col" class="text-center">Fichier</th>
+                        <th scope="col" class="text-center">Date de téléchargement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in history %}
+                        <tr>
+                            <td class="text-center">{{ u.type_fichier }}</td>
+                            <td class="text-center">{{ u.nature_fichier }}</td>
+                            <td class="text-center">{{ u.type_pi }}</td>
+                            <td class="text-center">{{ u.annee }}</td>
+                            <td class="text-center"><a href="{{ u.upload_file.url }}" download>{{ u.upload_file }}</a></td>
+                            <td class="text-center">{{ u.date_ajout }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#my_table').DataTable();
+    });
+</script>
+{% endblock %}

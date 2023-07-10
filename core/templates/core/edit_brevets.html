@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Modifier le Brevet{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-5 offset-sm-3">
+            <br>
+            <h4 class="text-center">Modifier le brevet</h4>
+            <hr>
+            <form method="post" action="{% url 'core:edit_brevets' brevet.pk %}">
+                {% csrf_token %}
+                  <div class="form-group">
+                    <label for="type_brevets">Type de brevet :</label>
+                      <select class="form-control" name="type_brevets" id="type_brevets">
+                          <option value="Delivrance" {% if brevet.type_brevets == 'Delivrance' %}selected{% endif %}>Delivrance</option>
+                          <option value="Demande" {% if brevet.type_brevets == 'Demande' %}selected{% endif %}>Demande</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="nombre_pct">PCT :</label>
+                    <input type="number" name="nombre_pct" class="form-control" id="nombre_pct" aria-describedby="emailHelp" value="{{ brevet.nombre_pct }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="nombre_cp">CP :</label>
+                    <input type="number" name="nombre_cp" class="form-control" id="nombre_cp" aria-describedby="emailHelp" value="{{ brevet.nombre_cp }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="annee_brevets">Année du brevet :</label>
+                    <input type="number" name="annee_brevets" class="form-control" id="annee_brevets" aria-describedby="emailHelp" value="{{ brevet.annee_brevets }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="pays_brevets">Pays :</label>
+                      <select class="form-control" name="pays_brevets" id="pays_brevets">
+                          {% for p in pays %}
+                                <option value="{{ p.pk }}" {% if brevet.pays_brevets.pk == p.pk %}selected{% endif %}>{{ p.nom_pays }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-outline-primary">Valider</button>
+            </form>
+            <hr>
+        </div>
+    </div>
+{% endblock %}

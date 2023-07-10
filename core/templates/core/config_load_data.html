@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Importer des données{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col col-sm-4">
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">
+                Gestion des utilisateurs
+              </a>
+              <a href="#" class="list-group-item list-group-item-action {% if d_menu == 'load' %}active{% endif %}">
+                  Importer des données
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                  Exporter des données
+              </a>
+            </div>
+        </div>
+        <div class="col col-sm-8">
+            <h4>Importer des données</h4>
+        </div>
+    </div>
+{% endblock %}

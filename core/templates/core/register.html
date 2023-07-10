@@ -1,0 +1,137 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Ajout d'un nouvel utilisateur{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col col-sm-3">
+            <div class="list-group">
+                <li class="list-group-item active">
+                      <a href="{% url 'core:register' %}" class="btn">Gestion des utilisateurs</a>
+                </li>
+                <div class="btn-group dropright">
+                  <button class="list-group-item list-group-item-action dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Exporter des fichiers
+                  </button>
+                  <div class="dropdown-menu">
+                      <a href="{% url 'core:export_file_oapi' %}" class="dropdown-item {% if i_menu == 'oapi' %}active{% endif %}">Fichiers OAPI</a>
+                      <a href="{% url 'core:export_file_ompi' %}" class="dropdown-item {% if i_menu == 'ompi' %}active{% endif %}">Fichiers OMPI</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-9">
+            <h4>Ajout d'un nouvel utilisateur</h4>
+            <hr>
+            <form action="{% url 'core:register' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <label for="name">Nom d'utilisateur :</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="btn btn-primary">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </span>
+                            <input id="name" type="text" placeholder="Nom d'utilisateur" class="form-control" name="username">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="email">Adresse mail :</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="btn btn-primary">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </span>
+                            <input id="email" name="email" type="email" placeholder="Email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="password1">Mot de passe :</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="btn btn-primary">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                            </span>
+                            <input id="password1" name="password1" type="password" placeholder="Mot de passe" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="password2">Confirmer mot de passe :</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <span class="btn btn-primary">
+                                    <i class="fa fa-key"></i>
+                                </span>
+                            </span>
+                            <input id="password2" name="password2" type="password" placeholder="Confirmer mot de passe" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-outline-primary float-right">Valider</button>
+            </form>
+            <br><br>
+            <hr>
+        </div>
+        <div class="offset-sm-3 col-sm-9">
+            <h4>Listing des utilisateurs</h4>
+            <div class="alert alert-dark" role="alert">
+              Nombre d'utilisateurs : <strong>{{ users|length }}</strong>
+            </div>
+            <table id="my_table" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom d'utilisateur</th>
+                        <th scope="col" class="text-center">Email</th>
+                        <th scope="col">Rôle</th>
+                        <th scope="col">Statut du compte</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                        <tr>
+                            <td class="text-center">{{ u.username }}</td>
+                            <td class="text-center">{{ u.email }}</td>
+                            <td class="text-center">
+                                {{u.groups.all.0|title}}
+                            </td>
+                            <td class="text-center">
+                                {% if u.is_active %}
+                                    Compte activé
+                                {% else %}
+                                    Compte désactivé
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'core:edit_user' u.username %}" class="btn btn-outline-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                {% if u.groups.all.0|stringformat:'s' == 'staff' %}
+                                    <a href="{% url 'core:edit_group' 'staff' 'admin' u.username %}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-users"></i></a>
+                                {% else %}
+                                    <a href="{% url 'core:edit_group' 'admin' 'staff' u.username %}" class="btn btn-outline-secondary btn-sm"><i class="fa fa-user"></i></a>
+                                {% endif %}
+                                {% if u.is_active %}
+                                    <a href="{% url 'core:edit_status' 'deactivate' u.username %}" class="btn btn-outline-danger btn-sm"><i class="fa fa-lock"></i></a>
+                                {% else %}
+                                    <a href="{% url 'core:edit_status' 'activate' u.username %}" class="btn btn-outline-success btn-sm"><i class="fa fa-unlock"></i></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#my_table').DataTable();
+    });
+</script>
+{% endblock %}

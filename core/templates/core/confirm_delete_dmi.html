@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Suppression d'un DMI{% endblock %}
+
+
+{% block content %}
+    <div class="card text-center">
+      <div class="card-header">
+        Informations
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Suppression d'un DMI</h5>
+        <p class="card-text">Voulez-vous vraiment ce DMI ?</p>
+        <a href="{% url 'core:listing_dmi' %}" class="btn btn-outline-secondary">Annuler</a>
+        <a href="{% url 'core:delete_dmi' pk %}" class="btn btn-outline-danger">Valider</a>
+      </div>
+    </div>
+{% endblock %}

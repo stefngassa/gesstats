@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Importer fichier{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col offset-sm-3 col-sm-5">
+            <h4>Importer un fichier</h4>
+            <br>
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+              <div class="card-body">
+                  <h6 class="text-primary"><u>Note :</u></h6>
+                  <span class="text-muted">
+                      Vérifier que le classeur dont vous voulez importer les donner est de type '.xls' ou '.xlsx',<br>
+                  qu'il s'agit bien de fichier de Pays et que les feuilles portent bien les noms conformes.
+                  </span><br>
+                  <span class="text-danger">Veuillez fermer le classeur avant d'importer le fichier.</span>
+              </div>
+            </div>
+            <br>
+            <form method="post" action="{% url 'core:check_file_pays' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <label for="exampleFormControlFile1">Choisir un fichier :</label>
+                        <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+                    </div>
+              </div>
+                <br>
+                <button type="submit" class="btn btn-outline-primary">Valider</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

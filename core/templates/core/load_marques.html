@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Importer fichier{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col offset-sm-2 col-sm-8">
+            <br><br>
+            <h4 class="text-center">Importer un fichier de Marques</h4>
+            <br>
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+              <div class="card-body">
+                  <h6 class="text-primary"><u>Note :</u></h6>
+                  <span class="text-muted">
+                      Vérifier que le classeur dont vous voulez importer les donner est de type '.xls' ou '.xlsx',<br>
+                  qu'il s'agit bien de fichier de Marques et que les feuilles portent bien les noms conformes.
+                  </span><br>
+                  <span class="text-danger">Veuillez fermer le classeur avant d'importer le fichier.</span>
+              </div>
+            </div>
+            <br>
+            <hr>
+            <form method="post" action="{% url 'core:check_file_marques' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <label for="type_pi">Choisir un type :</label>
+                        <select name="type_pi" id="type_pi"class="form-control">
+                            <option value="Demande">Demande</option>
+                            <option value="Enregistrement">Enregistrement</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="annee">Entrez une année :</label>
+                        <input type="text" name="annee" id="annee" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="exampleFormControlFile1">Choisir un fichier :</label>
+                        <input type="file" class="form-control-file" name="file" id="exampleFormControlFile1">
+                    </div>
+              </div>
+                <br>
+                <button type="submit" class="btn btn-outline-primary float-right">Valider</button>
+            </form>
+            <br><br>
+            <hr>
+        </div>
+    </div>
+{% endblock %}

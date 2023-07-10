@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Ajout d'un Brevet{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <div class="row">
+                <div class="col col-sm-5">
+                    <br>
+                    <h4>Ajouter un Brevet</h4>
+                </div>
+                <div class="col offset-sm-3">
+                    <div>
+                        <br>
+                        <a href="{% url 'core:load_brevets' %}" class="btn btn-primary">Importer un fichier</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <form method="post" action="{% url 'core:add_brevets' %}">
+                {% csrf_token %}
+                  <div class="form-group">
+                    <label for="type_brevets">Type de brevet :</label>
+                      <select class="form-control" name="type_brevets" id="type_brevets">
+                          <option value="Delivrance">Delivrance</option>
+                          <option value="Demande">Demande</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="nombre_pct">PCT :</label>
+                    <input type="number" name="nombre_pct" class="form-control" id="nombre_pct" aria-describedby="emailHelp" placeholder="Nombre de brevets PCT'">
+                  </div>
+                  <div class="form-group">
+                    <label for="nombre_cp">CP :</label>
+                    <input type="number" name="nombre_cp" class="form-control" id="nombre_cp" aria-describedby="emailHelp" placeholder="Nombre de brevets CP">
+                  </div>
+                  <div class="form-group">
+                    <label for="annee_brevets">Année du brevet :</label>
+                    <input type="number" name="annee_brevets" class="form-control" id="annee_brevets" aria-describedby="emailHelp" placeholder="Entrez l'année du brevet">
+                  </div>
+                  <div class="form-group">
+                    <label for="pays_brevets">Pays :</label>
+                      <select class="form-control" name="pays_brevets" id="pays_brevets">
+                          {% for p in pays %}
+                                <option value="{{ p.pk }}">{{ p.nom_pays }}</option>
+                          {% endfor %}
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-outline-primary float-right">Valider</button>
+            </form>
+            <br><br>
+            <hr>
+        </div>
+    </div>
+{% endblock %}

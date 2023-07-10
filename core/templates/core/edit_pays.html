@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Modifier le Pays{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-5 offset-sm-3">
+            <h4>Modifier le Pays</h4>
+            <form method="post" action="{% url 'core:edit_pays' pays.pk %}">
+                {% csrf_token %}
+                  <div class="form-group">
+                    <label for="code">Code du pays :</label>
+                    <input type="text" name="code_pays" class="form-control" id="code" aria-describedby="emailHelp" value="{{ pays.code_pays}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="nom">Nom du pays :</label>
+                    <input type="text" name="nom_pays" class="form-control" id="nom" value="{{ pays.nom_pays }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="specification">Specification :</label>
+                      <select class="form-control" name="specification_pays" id="specification">
+                          <option value="Etrangers" {% if pays.specification_pays == 'Etrangers' %}selected{% endif %}>Etrangers</option>
+                          <option value="Nationaux" {% if pays.specification_pays == 'Nationaux' %}selected{% endif %}>Nationaux</option>
+                      </select>
+                  </div>
+                  <button type="submit" class="btn btn-outline-primary">Valider</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,261 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block content %}
+    <h1>TABLEAU DE BORD {{ choice_pi }} {{ type_pi }} - {{ annee_pi }}</h1>
+    <hr>
+    {% if non_exist %}
+    <div class="container">
+        <div class="card text-center">
+              <div class="card-header h1">
+                        Informations
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Aucune données de {{choice_pi}} n'existent pour l'année {{annee_pi}} et/ou {{annee_passee}} </h5>
+                <p class="card-text">Bien vouloir informer l'administrateur système ou le statisticien.</p>
+              </div>
+        </div>
+    </div>
+    {% else %}
+    <h5>Taux de croissance par rapport à l'année précédente</h5>
+    <br>
+    <div class="row">
+        <div class="col col-sm-4">
+            <div class="card shadow bg-light rounded">
+                <div class="card-header d-flex justify-content-between">
+                    <h5>Total {% if choice_pi == 'DMI' or choice_pi == 'Marques' %}{{ type_pi|truncatechars:10|upper }}{% else %}{{ type_pi|upper }}{% endif %} :</h5>
+                    <h6>{{ total_pi_actuel }}</h6>
+                    <div class="text-{% if pourcentage_total_type_1 > 0 %}success{% else %}danger{% endif %}">{{ pourcentage_total_type_1 }}%</div>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5>Non résidents :</h5>
+                        <h6>{{ total_pi_etran_actuel }}</h6>
+                        <div class="text-{% if pourcentage_etran_type_1 > 0 %}success{% else %}danger{% endif %}">{{ pourcentage_etran_type_1 }}%</div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h5>Résidents :</h5>
+                        <h6>{{ total_pi_nat_actuel }}</h6>
+                        <div class="text-{% if pourcentage_nat_type_1 > 0 %}success{% else %}danger{% endif %}">{{ pourcentage_nat_type_1 }}%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-4">
+            <div class="card shadow bg-light rounded">
+                <div class="card-header d-flex justify-content-between">
+                    <h5>Total {% if choice_pi == 'DMI' %}{{ voie_1|truncatechars:10|upper }}{% else %}{{ voie_1|upper }}{% endif %} :</h5>
+                    <h6>
+                        {% if choice_pi == 'Brevets' %}
+                            {{ total_pi_etran_actuel }}
+                        {% else %}
+                            {{ total_voie_1_actuel }}
+                        {% endif %}
+                    </h6>
+                    {% if choice_pi != 'Marques' %}
+                        <div class="text-{% if pourcentage_total_voie_1 > 0 %}success{% else %}danger{% endif %}">
+                            {% if choice_pi != 'DMI' %}
+                                {{ pourcentage_total_voie_1 }}%
+                            {% else %}
+                                {{ pourcentage_etran_type_1 }}%
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                {% if choice_pi != 'DMI' %}
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5>Non résidents :</h5>
+                        <h6>{{ total_voie_1_etran_actuel }}</h6>
+                        {% if choice_pi != 'Marques' %}
+                            <div class="text-{% if pourcentage_etran_voie_1 > 0 %}success{% else %}danger{% endif %}">{{ pourcentage_etran_voie_1 }}%</div>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h5>Résidents :</h5>
+                        <h6>{{ total_voie_1_nat_actuel }}</h6>
+                        {% if choice_pi != 'Marques' %}
+                            <div class="text-{% if pourcentage_nat_voie_1 > 0 %}success{% else %}danger{% endif %}">{{ pourcentage_nat_voie_1 }}%</div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col col-sm-4">
+            <div class="card shadow bg-light rounded">
+                <div class="card-header d-flex justify-content-between">
+                    <h5>Total {% if choice_pi == 'DMI' %}{{ voie_2|truncatechars:10|upper }}{% else %}{{ voie_2|upper }}{% endif %} :</h5>
+                    <h6>
+                        {% if choice_pi == 'Brevets' %}
+                            {{ total_pi_nat_actuel }}
+                        {% else %}
+                            {{ total_voie_2_actuel }}
+                        {% endif %}
+                    </h6>
+                    {% if choice_pi != 'Marques' %}
+                        <div class="text-{% if pourcentage_total_voie_2 > 0 %}success{% else %}danger{% endif %}">
+                            {% if choice_pi != 'DMI' %}
+                                {{ pourcentage_total_voie_2 }}%
+                            {% else %}
+                                {{ pourcentage_nat_type_1 }}%
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                {% if choice_pi != 'DMI' %}
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5>Non résidents :</h5>
+                        <h6>{{ total_voie_2_etran_actuel }}</h6>
+                        {% if choice_pi != 'Marques' %}
+                            <div class="text-{% if pourcentage_etran_voie_2 > 0 %}success{% else %}danger{% endif %}">{{ pourcentage_etran_voie_2 }}%</div>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h5>Résidents :</h5>
+                        <h6>{{ total_voie_2_nat_actuel }}</h6>
+                        {% if choice_pi != 'Marques' %}
+                            <div class="text-{% if pourcentage_nat_voie_2 > 0 %}success{% else %}danger{% endif %}">{{ pourcentage_nat_voie_2 }}%</div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <!-- Affichage des différents graphiques -->
+    <div class="row">
+        <div class="col col-sm-7">
+            <h5>Evolution des {{ choice_pi }} sur les 5 dernières années</h5>
+            <div class="card shadow bg-white rounded p-2">
+                <canvas id="myLineChart"></canvas>
+            </div>
+        </div>
+        <div class="col col-sm-5">
+            <h5>Répartition des {{ choice_pi }} par {% if choice_pi == 'Brevets' %}voie{% endif %}{% if choice_pi == 'DMI' %}résidence{% endif %}{% if choice_pi == 'Marques' %}classes{% endif %}</h5>
+            <div class="card shadow bg-white rounded p-2">
+                <canvas id="myPieChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col col-sm-4">
+            <div class="row">
+                {% if choice_pi != 'Brevets' %}
+                    <div class="col col-sm-12">
+                        <h5>Top 5 des classes</h5>
+                        <div class="card shadow bg-white rounded p-2">
+                            <canvas id="mySecondPieChart"></canvas>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="col col-sm-12">
+                    <h5>Pays ayant déposés des {{ choice_pi|upper }}</h5>
+                    {% if choice_pi == 'Brevets' %}<br>{% endif %}
+                    <div class="card shadow bg-light p-2 text-center">
+                        <h6>Non résidents : {{ total_pays_etran }}</h6>
+                        <h6>Résidents : {{ total_pays_nat }}</h6>
+                        <h6>Total Pays : {{ total_pays }}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-8">
+            <h5>Top 5 des pays ayant déposés des {{ choice_pi|upper }}</h5>
+            <br>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Rang</th>
+                        <th class="text-center" scope="col">Nom du Pays</th>
+                        <th class="text-center" scope="col">Nombre de {{ choice_pi }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in top_5_pays %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td class="text-center">{{ t.nom }}</td>
+                            <td class="text-center">{{ t.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block scripts %}
+<script>
+  const ctx = document.getElementById('myPieChart');
+  const ctx_line = document.getElementById('myLineChart');
+  const ctx_second = document.getElementById('mySecondPieChart')
+
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['{{voie_1}}', '{{voie_2}}'],
+      datasets: [{
+        label: '% ',
+        data: [{{proportion_voie_1|stringformat:".2f"}}, {{proportion_voie_2|stringformat:".2f"}}],
+        borderWidth: 1
+      }]
+    },
+  });
+
+  new Chart(ctx_second, {
+    type: 'pie',
+    data: {
+      labels: [{% for c in classes %} '{{c.0}}', {% endfor %}],
+      datasets: [{
+        label: ' ',
+        data: [{% for c in classes %} '{{c.1}}', {% endfor %}],
+        borderWidth: 1
+      }]
+    },
+  });
+
+  new Chart(ctx_line, {
+    type: 'line',
+    data: {
+      labels: [{% for l in labels %} '{{ l }}', {% endfor %}],
+      datasets: [{
+        label: 'Total',
+        data: [{% for d in data_total %} {{ d }}, {% endfor %}],
+        borderWidth: 1
+      },{
+        label: '{{voie_1}}',
+        data: [{% for d in data_type_1 %} {{ d }}, {% endfor %}],
+        borderWidth: 1
+      },{
+        label: '{{voie_2}}',
+        data: [{% for d in data_type_2 %} {{ d }}, {% endfor %}],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: {
+            display: false,
+          }
+        },
+        y: {
+          beginAtZero: true,
+          grid: {
+            display: false,
+          }
+        }
+      }
+    }
+  });
+</script>
+
+{% endblock %}

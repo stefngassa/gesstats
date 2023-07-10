@@ -1,0 +1,192 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Ajout d'un DMI{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col col-sm-5">
+                    <br>
+                    <h4>Ajouter un DMI</h4>
+                </div>
+                <div class="col offset-sm-5">
+                    <div>
+                        <br>
+                        <a href="{% url 'core:load_dmi' %}" class="btn btn-primary">Importer un fichier</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <form method="post" action="{% url 'core:add_dmi' %}">
+                {% csrf_token %}
+                  <div class="form-row">
+                      <div class="col">
+                          <label for="pays_dmi">Pays :</label>
+                          <select class="form-control" name="pays_dmi" id="pays_dmi">
+                              {% for p in pays %}
+                                    <option value="{{ p.pk }}">{{ p.nom_pays }}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                      <div class="col">
+                          <label for="type_dmi">Type de DMI :</label>
+                          <select class="form-control" name="type_dmi" id="type_dmi">
+                              <option value="Enregistrement">Enregistrement</option>
+                              <option value="Demande">Demande</option>
+                          </select>
+                      </div>
+                      <div class="col">
+                          <label for="nombre_dmi">Nombre de DMI :</label>
+                          <input type="number" name="nombre_dmi" class="form-control" id="nombre_dmi" aria-describedby="emailHelp" placeholder="Nombre de DMI">
+                      </div>
+                      <div class="col">
+                        <label for="annee_dmi">Année du DMI :</label>
+                        <input type="number" name="annee_dmi" class="form-control" id="annee_dmi" aria-describedby="emailHelp" placeholder="Entrez l'année du DMI">
+                      </div>
+                  </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_1">Classe 1 :</label>
+                        <input type="number" id="classe_1" name="classe_1" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_2">Classe 2 :</label>
+                        <input type="number" id="classe_2" name="classe_2" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_3">Classe 3:</label>
+                        <input type="number" id="classe_3" name="classe_3" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_4">Classe 4 :</label>
+                        <input type="number" id="classe_4" name="classe_4" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_5">Classe 5 :</label>
+                        <input type="number" id="classe_5" name="classe_5" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_6">Classe 6 :</label>
+                        <input type="number" id="classe_6" name="classe_6" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_7">Classe 7 :</label>
+                        <input type="number" id="classe_7" name="classe_7" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_8">Classe 8 :</label>
+                        <input type="number" id="classe_8" name="classe_8" class="form-control" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_1">Classe 9 :</label>
+                        <input type="number" id="classe_9" name="classe_9" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_2">Classe 10 :</label>
+                        <input type="number" id="classe_10" name="classe_10" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_3">Classe 11:</label>
+                        <input type="number" id="classe_11" name="classe_11" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_4">Classe 12 :</label>
+                        <input type="number" id="classe_12" name="classe_12" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_5">Classe 13 :</label>
+                        <input type="number" id="classe_13" name="classe_13" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_6">Classe 14 :</label>
+                        <input type="number" id="classe_14" name="classe_14" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_7">Classe 15 :</label>
+                        <input type="number" id="classe_15" name="classe_15" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_8">Classe 16 :</label>
+                        <input type="number" id="classe_16" name="classe_16" class="form-control" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_1">Classe 17 :</label>
+                        <input type="number" id="classe_17" name="classe_17" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_2">Classe 18 :</label>
+                        <input type="number" id="classe_18" name="classe_18" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_3">Classe 19 :</label>
+                        <input type="number" id="classe_19" name="classe_19" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_4">Classe 20 :</label>
+                        <input type="number" id="classe_20" name="classe_20" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_5">Classe 21 :</label>
+                        <input type="number" id="classe_21" name="classe_21" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_6">Classe 22 :</label>
+                        <input type="number" id="classe_22" name="classe_22" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_7">Classe 23 :</label>
+                        <input type="number" id="classe_23" name="classe_23" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_8">Classe 24 :</label>
+                        <input type="number" id="classe_24" name="classe_24" class="form-control" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="classe_1">Classe 25 :</label>
+                        <input type="number" id="classe_25" name="classe_25" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_2">Classe 26 :</label>
+                        <input type="number" id="classe_26" name="classe_26" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_3">Classe 27 :</label>
+                        <input type="number" id="classe_27" name="classe_27" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_4">Classe 28 :</label>
+                        <input type="number" id="classe_28" name="classe_28" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_5">Classe 29 :</label>
+                        <input type="number" id="classe_29" name="classe_29" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_6">Classe 30 :</label>
+                        <input type="number" id="classe_30" name="classe_30" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_7">Classe 31 :</label>
+                        <input type="number" id="classe_31" name="classe_31" class="form-control" placeholder="Nombre">
+                    </div>
+                    <div class="col">
+                        <label for="classe_8">Classe 32 :</label>
+                        <input type="number" id="classe_32" name="classe_32" class="form-control" placeholder="Nombre">
+                    </div>
+                </div>
+                <br>
+                  <button type="submit" class="btn btn-outline-primary float-right">Valider</button>
+            </form>
+            <br><br>
+            <hr>
+        </div>
+    </div>
+{% endblock %}
